@@ -44,12 +44,15 @@ for line in sys.stdin:
         E[vertex] = []
         V.add(vertex)
         
-# The object-oriented way to think about this would be to create a class Graph and
-# then do the needful. Since I like having more control, I'm dealing directly with the
-# vertices and edges.
+G = UndirectedGraph(V, E)
+
+# We will be using members of class UndirectedGraph directly
+# i.e. as G.E and G.V instead of using G.get_edges() and G.get_vertices()
+# this kind of abstraction breaking is usually frowned upon,
+# but this project might not need that level of organization I feel
         
 # compute vertex cover by brute force
-print brute_force_VC(V, E)
+print brute_force_VC(G)
         
         
     

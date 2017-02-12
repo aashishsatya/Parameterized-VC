@@ -8,20 +8,20 @@ A script having a set of simple functions to check graph properties.
 
 """
 
-#class UndirectedGraph:
-#    
-#    def __init__(self, V, E):
-#        
-#        """
-#        Initialize the Graph class. Accepts a set of vertices V and edges E as input.
-#        V is implemented as a set
-#        E is implemented as an adjacency list in the form of a dictionary.
-#        """
-#        
-#        self.V = V
-#        self.E = E
+class UndirectedGraph:
+    
+    def __init__(self, V, E):
+        
+        """
+        Initialize the Graph class. Accepts a set of vertices V and edges E as input.
+        V is implemented as a set
+        E is implemented as an adjacency list in the form of a dictionary.
+        """
+        
+        self.V = V
+        self.E = E
 
-def check_vertex_cover(E, S):
+def check_vertex_cover(G, S):
     
     """
     Returns True if set S is a vertex cover of the edge set E,
@@ -31,12 +31,12 @@ def check_vertex_cover(E, S):
     of edges
     """
     
-    for start in E.keys():
+    for start in G.E.keys():
         if start in S:
             # vertex start is already in the cover
             # so we needn't check its corresponding edges
             continue
-        for end in E[start]:
+        for end in G.E[start]:
             if not (end in S):
                 return False
     return True
