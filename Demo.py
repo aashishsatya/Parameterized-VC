@@ -7,6 +7,7 @@ Created on Sun Feb 12 12:04:18 2017
 
 import sys
 from BruteForceVC import *
+from ParameterizedVC import *
 
 E = {}
 V = set([])
@@ -48,11 +49,10 @@ G = UndirectedGraph(V, E)
 
 # We will be using members of class UndirectedGraph directly
 # i.e. as G.E and G.V instead of using G.get_edges() and G.get_vertices()
-# this kind of abstraction breaking is usually frowned upon,
-# but this project might not need that level of organization I feel
+# This kind of abstraction breaking is usually frowned upon,
+# but should serve our purposes a little more easily
         
 # compute vertex cover by brute force
+
+print parameterized_vc(G, k)
 print brute_force_VC(G)
-        
-        
-    

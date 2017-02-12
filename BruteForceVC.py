@@ -15,10 +15,11 @@ def brute_force_VC(G):
     """
     
     for k in xrange(1, len(G.V) + 1):
+        print 'Checking subsets of size', str(k) + '...'
         # iterate over k sized subsets
-        k_subsets = set(itertools.combinations(G.V, k))
+        #k_subsets = set()
         # check if each of those subsets is a vertex cover
-        for subset in k_subsets:
+        for subset in itertools.combinations(G.V, k):
             # set(subset) is needed for O(1) checking of membership
             # otherwise subset is generated as a list and might take
             # upto O(n) time
