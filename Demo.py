@@ -54,5 +54,9 @@ G = UndirectedGraph(V, E)
         
 # compute vertex cover by brute force
 
-print parameterized_vc(G, k)
+#print 'Edge set =', E
+pvc = parameterized_vc(G, k)
+#pvc = iterated_pvc(G)
+print pvc
+print 'Size of vertex cover =', len(pvc)
 print brute_force_VC(G)

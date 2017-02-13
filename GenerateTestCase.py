@@ -7,8 +7,8 @@ Created on Sun Feb 12 23:53:50 2017
 
 import random
 
-n = 25  # number of vertices
-k = 25   # parameter
+n = 22  # number of vertices
+k = 22   # parameter
 
 vertices = set([])
 edges = {}
