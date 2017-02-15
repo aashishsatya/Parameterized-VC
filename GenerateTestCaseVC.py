@@ -81,19 +81,24 @@ def run_all():
     and n/10, 2n/10, 3n/10, 4n/10 and 5n/10 for the value of k
     """
     
-    for n in xrange(10, 15, 1):
+    for n in xrange(10, 30, 5):
         print 'Running tests for graph of size', str(n) + '...' 
         for k in xrange(n/10, n/2, 1):
             G = generate_test_case(n, k)
-            print 'Generated graph:'
-            print G
+            #print 'Generated graph:'
+            #print G
             print 'Running tests for vertex cover of size', str(k) + '...'
             print 'Running brute force...'
             # run brute force here
-            brute_vc = brute_force_VC(G)
+            brute_vc, brute_time = brute_force_VC(G)
+            print 'Brute force vertex cover:'
             print brute_vc
+            print 'Time taken for brute force =', brute_time, 'seconds'
             print 'Running parameterized...'
             # run parameterized here
-            param_vc = parameterized_vc(G, k)
+            param_vc, param_time = parameterized_vc(G, k)
+            print 'Parameterized vertex cover:'
             print param_vc
-    
+            print 'Time taken for parameterized algorithm =', param_time, 'seconds'
+
+run_all()    
