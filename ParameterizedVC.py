@@ -15,7 +15,7 @@ import time
 sorted_vertices = []
 k = 0
 start_time = time.time()
-TIME_MAX = 60
+TIME_MAX = 30
 
 def param_vc_wrapper(G, S, next_vertex_count):
     

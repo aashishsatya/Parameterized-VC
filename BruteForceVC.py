@@ -9,7 +9,7 @@ import itertools
 import time
 from GraphUtil import *
 
-TIME_MAX = 60
+TIME_MAX = 30
 
 def brute_force_VC(G):
     

@@ -48,8 +48,6 @@ def generate_test_case(n, k):
     
     # generate edges for each vertex in the vertex cover
     
-    print '\nVertex cover =', vc
-    
     for start in vc:
         if not (start in edges):
             edges[start] = []
@@ -64,15 +62,7 @@ def generate_test_case(n, k):
                 
     G = UndirectedGraph(vertices, edges)
     
-    # save the vertex cover
-    
-    with open('ans.txt', 'a') as f:
-        f.write('n = ' + str(n) + '\n')
-        f.write('VC size = ' + str(len(vc)) + '\n')
-        f.write(str(vc) + '\n\n')
-        f.close()         
-    
-    return G
+    return (G, vc)
     
 def run_all():
     
@@ -81,24 +71,69 @@ def run_all():
     and n/10, 2n/10, 3n/10, 4n/10 and 5n/10 for the value of k
     """
     
-    for n in xrange(10, 30, 5):
-        print 'Running tests for graph of size', str(n) + '...' 
-        for k in xrange(n/10, n/2, 1):
-            G = generate_test_case(n, k)
-            #print 'Generated graph:'
-            #print G
-            print 'Running tests for vertex cover of size', str(k) + '...'
+    # stores the time taken by each of the algorithm
+    # values will be stored as 
+    # {n1: {k1: (brute force, parameterized), k2: ...}, n2: ...}
+    time_dict = {}
+    
+    for n in xrange(25, 625, 25):
+        time_dict[n] = {}
+        print 'Running tests for graph of size', str(n) + '...\n' 
+        for k in xrange(n/10, 6*n/10, n/10):
+            
+            G, vc = generate_test_case(n, k)
+            
+            # write the generated graph into a file
+            
+            with open(str(n) + '_' + str(k) + '.txt', 'w') as f:
+                f.write(str(k))
+                f.write('\n')
+                f.write(str(G))
+                
+            # write the vertex cover into a file
+
+            with open(str(n) + '_' + str(k) + '_ans.txt', 'w') as f:
+                for vertex in vc:
+                    f.write(vertex)
+                    f.write('\n')            
+            
+            print 'Running tests for vertex cover of size', str(k) + '...\n'
+            
             print 'Running brute force...'
-            # run brute force here
             brute_vc, brute_time = brute_force_VC(G)
-            print 'Brute force vertex cover:'
-            print brute_vc
-            print 'Time taken for brute force =', brute_time, 'seconds'
+            print 'Time taken for brute force =', brute_time, 'seconds\n'
+            
             print 'Running parameterized...'
             # run parameterized here
             param_vc, param_time = parameterized_vc(G, k)
-            print 'Parameterized vertex cover:'
-            print param_vc
-            print 'Time taken for parameterized algorithm =', param_time, 'seconds'
+            print 'Time taken for parameterized algorithm =', param_time, 'seconds\n'
+            
+            time_dict[n][k] = (brute_time, param_time)
+            
+    return time_dict
 
-run_all()    
+time_val = run_all()
+BRUTE = 0
+PARAM = 1
+
+# write the dict values into a file
+
+with open('time_report.csv', 'w') as f:
+    for n in time_val.keys():
+        for k in time_val[n].keys():
+            csv_text = ''
+            csv_text += str(n) + ','
+            csv_text += str(k) + ','
+            if time_val[n][k][BRUTE] >= TIME_MAX:
+                csv_text += 'TIME_MAX'
+            else:
+                csv_text += str(time_val[n][k][BRUTE])
+            csv_text += ','
+            if time_val[n][k][PARAM] >= TIME_MAX:
+                csv_text += 'TIME_MAX'
+            else:
+                csv_text += str(time_val[n][k][PARAM])
+            csv_text += '\n'
+            f.write(csv_text)
+
+print time_val    
