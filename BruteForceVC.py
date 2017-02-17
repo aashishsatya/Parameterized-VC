@@ -22,7 +22,6 @@ def brute_force_VC(G):
     for k in xrange(1, len(G.V) + 1):
         print 'Checking subsets of size', str(k) + '...'
         # iterate over k sized subsets
-        #k_subsets = set()
         # check if each of those subsets is a vertex cover
         for subset in itertools.combinations(G.V, k):
             current_time = time.time()

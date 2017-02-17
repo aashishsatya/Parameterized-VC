@@ -39,7 +39,6 @@ def param_vc_wrapper(G, S, next_vertex_count):
     # now we choose between the vertex that comes next in degree
     # or its neighbours
         
-    #print type(sorted_vertices)
     new_vc = S.copy()
     new_vc.add(sorted_vertices[next_vertex_count])
     

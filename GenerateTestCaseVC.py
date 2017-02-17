@@ -34,7 +34,7 @@ def generate_test_case(n, k):
         
     vc_size = k
         
-    # uncomment the below lines if you want the vc to be
+    # uncomment the below lines if you want the vc size to be
     # selected randomly
     
 #    vc_size = int(n/UPPER_LIMIT)
